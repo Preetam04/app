@@ -1,22 +1,36 @@
-import { Link, useRouter } from "expo-router";
+import { DownloadPicture } from "@/components/BottomSheet";
+import { useRouter } from "expo-router";
+import { useState } from "react";
 import { Button, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function account() {
-  const navigate = useRouter();
-  return (
-    <SafeAreaView>
-      <Text>Account Page</Text>
-      <Link href={"/accountinfo"}>
-        <Text>Account info</Text>
-      </Link>
+  const [pictureOpen, setPictureOpen] = useState(false);
 
-      <Button
-        title="Account Info"
-        onPress={() => {
-          navigate.push("/accountinfo");
+  const onClose = () => {
+    setPictureOpen(false);
+  };
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+      }}
+    >
+      <View
+        style={{
+          flex: 1,
         }}
-      />
+      >
+        <Text>Account Page</Text>
+
+        <Button
+          title="Open Bottom Sheet"
+          onPress={() => {
+            setPictureOpen(true);
+          }}
+        />
+        {pictureOpen && <DownloadPicture onClose={onClose} />}
+      </View>
     </SafeAreaView>
   );
 }

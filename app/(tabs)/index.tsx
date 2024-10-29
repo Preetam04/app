@@ -28,5 +28,3 @@ function SettingsScreen() {
     </View>
   );
 }
-
-// 1.12
